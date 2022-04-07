@@ -18,6 +18,13 @@ second: normal chrome debug install
 - load unzipped extension
 - navigate to cloned repo and load
 
+second: great expense firefox install
+
+- install firefox development version, no chance in normal version
+- zip the folder, take care there is no root folder in the zip
+- rename zip to xpi
+- go to Addons, click gear, install from file and select xpi
+
 third: update
 - git pull
 - go to extensions menu in browser
@@ -29,7 +36,8 @@ third: update
 checked with
 - Chrome
 - Vivaldi
+- Firefox Developer Edition
 
 # Disclaimer
 
-I am not in touch with Quotenbulle or Orbitexchange at all.
+I am not in touch with Quotenbulle or Orbit Exchange at all.
