@@ -4,7 +4,9 @@ A chrome extension to change the Orbit Exchange URL on Quotenbulle.de if you hav
 
 ## Features
 
-- on https://\*.quotenbulle.de/tools/rechner/\* pages: checks with a delay of half a second for links to Orbit Exchange and and changes the link to the configured value (e.g. 'orbitxch.com').
+- on https://\*.quotenbulle.de/tools/rechner/\* pages: checks with a delay of 200ms for links to Orbit Exchange and and changes the link to the configured value (e.g. 'orbitxch.com').
+- on https://\*.quotenbulle.de/tools/kombirechner/\* pages: checks with a delay of 200ms for links to Orbit Exchange and and changes the link to the configured value (e.g. 'orbitxch.com').
+- on https://\*.quotenbulle.de/tools/kombirechner/\* pages: changed format of euro values to orbit compatible format
 
 ## Installation
 
@@ -41,3 +43,9 @@ checked with
 # Disclaimer
 
 I am not in touch with Quotenbulle or Orbit Exchange at all.
+
+
+# Other
+## add jQuery to developer console
+    var script = document.createElement('script');
+    script.src = "https://code.jquery.com/jquery-3.6.0.min.js";document.getElementsByTagName('head')[0].appendChild(script);

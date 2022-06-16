@@ -7,6 +7,11 @@
     "default_popup": "index.html",
     "default_icon": "favicon.ico"
   },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "g-kevin@g-kevin"
+    }
+  },
   "icons": {
     "16": "favicon.ico",
     "48": "favicon.ico",
@@ -15,7 +20,8 @@
   "content_scripts": [
     {
       "matches": [
-        "https://*.quotenbulle.de/tools/rechner/*"
+        "https://*.quotenbulle.de/tools/rechner/*",
+        "https://*.quotenbulle.de/tools/kombirechner/*"
       ],
       "run_at": "document_end",
       "js": [
@@ -27,6 +33,7 @@
   ],
   "permissions": [
     "activeTab",
-     "https://*.quotenbulle.de/tools/rechner/*"
+     "https://*.quotenbulle.de/tools/rechner/*",
+     "https://*.quotenbulle.de/tools/kombirechner/*"
   ]
 }
