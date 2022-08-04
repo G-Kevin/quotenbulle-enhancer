@@ -177,6 +177,11 @@ function renameOrbitAndFormatlayStakeLiabilityValues(orbitLandingDomain) {
     try {
         let url;
         try {
+            // replace Orbit domain
+            var domainReplaced = $("body").html().replace(/(www\.orbitexch\.com)/g, orbitLandingDomain);
+            $("body").html(domainReplaced);
+
+            // further action at kombirechner only
             url = window.location.pathname;
             if (url !== "/tools/kombirechner/") {
                 return false;
@@ -191,12 +196,6 @@ function renameOrbitAndFormatlayStakeLiabilityValues(orbitLandingDomain) {
             $("input[id^='input_liability_']").each(function (i, element) {
                  liabilityValues[i] = element.value.replace(/(\d*),(\d*)/, "$1.$2");
             });
-
-            // replace Orbit domain
-            var domainReplaced = $("body").html().replace(/(www\.orbitexch\.com)/g, orbitLandingDomain);
-            $("body").html(domainReplaced);
-
-            // switch comma to dot in lay stake field to match orbit format
             $("input[id^='input_lay_stake_']").each(function (i, element) {
                  element.value = layStakeValues[i];
             });
