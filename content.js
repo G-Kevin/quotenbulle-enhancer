@@ -49,18 +49,31 @@ function copyStringToClipboard(str) {
 }
 
 function createAndCopyExcelStringToClipboard(orbitLandingDomain) {
-    var date = document.getElementById("calc_date").innerHTML.replace(/\s-\s.*/g, '').replace(/(\d{2})\.(\d{2})\.(\d{2})/g, '$1.$2.20$3');
+    try {
+        var date = document.getElementById("calc_date").innerHTML.replace(/\s-\s.*/g, '').replace(/(\d{2})\.(\d{2})\.(\d{2})/g, '$1.$2.20$3');
+    } catch {
+        var date = "";
+    }
     var category = "Pre-Game";
     var sport = "Fußball";
     var league = "";
-    var event = document.getElementById("calc_event").getElementsByTagName('strong')[0].innerHTML;
+    try {
+        var event = document.getElementById("calc_event").getElementsByTagName('strong')[0].innerHTML;
+    } catch {
+        var event = "";
+    }
     var betType = "1X2";
 
-    var ergebnis = document.getElementById("calc_outcome").innerHTML;
-    var mannschaft1 = event.replace(/\s-\s.*/g, '');
-    var tipBack = ergebnis === mannschaft1 ? "1" : ergebnis === "Unentschieden" ? "X" : "2";
+    try {
+        var ergebnis = document.getElementById("calc_outcome").innerHTML;
+        var mannschaft1 = event.replace(/\s-\s.*/g, '');
+        var tipBack = ergebnis === mannschaft1 ? "1" : ergebnis === "Unentschieden" ? "X" : "2";
+        var tipLay = "lay" + tipBack;
+    } catch {
+        var tipBack = "";
+        var tipLay = "";
+    }
 
-    var tipLay = "lay" + tipBack;
     var stakeBack = document.getElementById("stake_bookie").value;
     var stakeLay = document.getElementById("liability_layer").value;
     var oddBack = document.getElementById("odds_bookie").value;
@@ -99,8 +112,8 @@ function createAndCopyExcelStringToClipboard(orbitLandingDomain) {
     }
 
     commissionBack = translateCommissionForExcel(commissionBack);
-
     var commissionLay = translateCommissionForExcel(orbitCommission);
+
     var bookie = "";
     var status = "Offen";
 
