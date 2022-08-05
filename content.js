@@ -20,6 +20,8 @@ function createCopyToExcelButton() {
             + copyStringToClipboard.toString()
             + createAndCopyExcelStringToClipboard.toString()
             + translateCommissionForExcel.toString()
+            + renameOrbitDomain.toString()
+            + "renameOrbitDomain(orbitLandingDomain);" // call to replace the orbit domain
             + '</script>');
         $functionsToAppend.appendTo($("body"));
 
@@ -170,67 +172,59 @@ function addFragmentToExcelString(data, useTabStop = true, useLinebreak = false)
     var tabStop = "	";
     var lineBreak = "\n";
     var returnFragment = data;
-    if(useTabStop) returnFragment += tabStop;
-    if(useLinebreak) returnFragment += lineBreak;
+    if (useTabStop) returnFragment += tabStop;
+    if (useLinebreak) returnFragment += lineBreak;
 
     return returnFragment;
 }
 
-function renameOrbitAndFormatlayStakeLiabilityValues(orbitLandingDomain) {
+function formatLayStakeLiabilityValues(orbitLandingDomain) {
     try {
-        let url;
-        try {
-            // replace Orbit domain
-            var domainReplaced = $("body").html().replace(/(www\.orbitexch\.com)/g, orbitLandingDomain);
-            $("body").html(domainReplaced);
-
-            // further action at kombirechner only
-            url = window.location.pathname;
-            if (url !== "/tools/kombirechner/") {
-                return false;
-            }
-
-            var layStakeValues = [];
-            var liabilityValues = [];
-            // switch comma to dot in lay stake field to match orbit format
-            $("input[id^='input_lay_stake_']").each(function (i, element) {
-                 layStakeValues[i] = element.value.replace(/(\d*),(\d*)/, "$1.$2");
-            });
-            $("input[id^='input_liability_']").each(function (i, element) {
-                 liabilityValues[i] = element.value.replace(/(\d*),(\d*)/, "$1.$2");
-            });
-            $("input[id^='input_lay_stake_']").each(function (i, element) {
-                 element.value = layStakeValues[i];
-            });
-            $("input[id^='input_liability_']").each(function (i, element) {
-                 element.value = liabilityValues[i];
-            });
-        } catch (e) {
-            console.error("ERROR in QB layStakeFormatter: ", e.message);
-            return false;
-        }
+        var layStakeValues = [];
+        var liabilityValues = [];
+        // switch comma to dot in lay stake field to match orbit format
+        $("input[id^='input_lay_stake_']").each(function (i, element) {
+             layStakeValues[i] = element.value.replace(/(\d*),(\d*)/, "$1.$2");
+        });
+        $("input[id^='input_liability_']").each(function (i, element) {
+             liabilityValues[i] = element.value.replace(/(\d*),(\d*)/, "$1.$2");
+        });
+        $("input[id^='input_lay_stake_']").each(function (i, element) {
+             element.value = layStakeValues[i];
+        });
+        $("input[id^='input_liability_']").each(function (i, element) {
+             element.value = liabilityValues[i];
+        });
     } catch (e) {
         console.error("ERROR in QB layStakeFormatter: ", e.message);
+        return false;
     }
 }
 
+function renameOrbitDomain(orbitLandingDomain) {
+    // replace Orbit domain with configured url
+    document.getElementById("exchange_type_img").parentNode.outerHTML = document.getElementById("exchange_type_img").parentNode.outerHTML.replace(/(www\.orbitexch\.com)/g, orbitLandingDomain);
+}
+
 setTimeout(() => {
-  try {
-    createCopyToExcelButton();
+    try {
+        createCopyToExcelButton();
 
-    // set listener on input field to trigger formatter after every change
-    $("input[id^='input_back_odds_']").on("change paste keyup propertychange input", function() {
-        // console.info("event listener triggered");
-        renameOrbitAndFormatlayStakeLiabilityValues(orbitLandingDomain);
-    });
-    $("input[id^='input_lay_odds_']").on("change paste keyup propertychange input", function() {
-        // console.info("event listener triggered");
-        renameOrbitAndFormatlayStakeLiabilityValues(orbitLandingDomain);
-    });
+        if (window.location.pathname === "/tools/kombirechner/") {
+            // set listener on input field to trigger formatter after every change
+            $("input[id^='input_back_odds_']").on("change paste keyup propertychange input", function() {
+                // console.info("event listener triggered");
+                formatLayStakeLiabilityValues(orbitLandingDomain);
+            });
+            $("input[id^='input_lay_odds_']").on("change paste keyup propertychange input", function() {
+                // console.info("event listener triggered");
+                formatLayStakeLiabilityValues(orbitLandingDomain);
+            });
 
-    // trigger initially to format the values after loading page
-    renameOrbitAndFormatlayStakeLiabilityValues(orbitLandingDomain);
-  } catch (e) {
-    console.error("ERROR in QB Linkchanger: ", e.message);
-  }
-}, 200);
+            // trigger initially to format the values after loading page
+            formatLayStakeLiabilityValues(orbitLandingDomain);
+        }
+    } catch (e) {
+        console.error("ERROR in QB Linkchanger: ", e.message);
+    }
+}, 100);
