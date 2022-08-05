@@ -74,7 +74,10 @@ function createAndCopyExcelStringToClipboard(orbitLandingDomain) {
         var tipLay = "";
     }
 
-    var stakeBack = document.getElementById("stake_bookie").value;
+    var dropdownListBetMode = document.getElementById("bet_mode");
+    var selectedDropdownListBetMode = dropdownListBetMode.options[dropdownListBetMode.selectedIndex].text;
+
+    var stakeBack = selectedDropdownListBetMode.includes("Freiwette") ? ("=" + document.getElementById("stake_bookie").value) + "-" + document.getElementById("stake_bookie").value : document.getElementById("stake_bookie").value;
     var stakeLay = document.getElementById("liability_layer").value;
     var oddBack = document.getElementById("odds_bookie").value;
     var oddLay = document.getElementById("odds_layer").value;
@@ -85,7 +88,7 @@ function createAndCopyExcelStringToClipboard(orbitLandingDomain) {
 
     var comissionOnWinningsLay = orbitCommissionOnWinnings;
 
-    switch(dropdownListCommissionBack.options[dropdownListCommissionBack.selectedIndex].value) {
+    switch (dropdownListCommissionBack.options[dropdownListCommissionBack.selectedIndex].value) {
       case "no_tax":
           var commissionBack = "0";
         break;
