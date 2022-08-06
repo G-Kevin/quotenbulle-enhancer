@@ -3,7 +3,7 @@ function createCopyToExcelButton() {
         let url;
         try {
             url = window.location.pathname;
-            if (url !== "/tools/rechner/") {
+            if (url !== "/tools/rechner/" && url !== "/tools/kombirechner/") {
                 return false;
             }
         } catch (e) {
