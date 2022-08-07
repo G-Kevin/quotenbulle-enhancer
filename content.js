@@ -59,6 +59,7 @@ function createAndCopyExcelStringToClipboard(orbitLandingDomain) {
     var excelString = "";
     var category = "Pre-Game";
     var sport = "Fußball";
+    var betType = "1X2";
     var league = "";
     try {
         // works in Kombirechner as well, because QB uses invalid HTML5 and reuses the same ID for all the bookie pictures
@@ -119,7 +120,6 @@ function createAndCopyExcelStringToClipboard(orbitLandingDomain) {
         } catch {
             var event = "";
         }
-        var betType = "1X2";
 
         try {
             var ergebnis = document.getElementById("calc_outcome").innerHTML;
@@ -185,7 +185,6 @@ function createAndCopyExcelStringToClipboard(orbitLandingDomain) {
         var tipBack = "";
         var oddBack = "";
 
-        var betType = "Kombi";
         var dropdownListBetMode = document.getElementById("select_acca_bet_mode");
         var selectedDropdownListBetMode = dropdownListBetMode.options[dropdownListBetMode.selectedIndex].text;
 
@@ -256,7 +255,7 @@ function createAndCopyExcelStringToClipboard(orbitLandingDomain) {
         excelString += addFragmentToExcelString(sport);
         excelString += addFragmentToExcelString(league);
         excelString += addFragmentToExcelString(event);
-        excelString += addFragmentToExcelString(betType);
+        excelString += addFragmentToExcelString("Kombi");
         excelString += addFragmentToExcelString(tipBack);
         excelString += addFragmentToExcelString(stakeBack);
         excelString += addFragmentToExcelString(oddBack);
