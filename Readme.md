@@ -1,18 +1,21 @@
-# Quotenbulle.de Orbit linkchanger
+# Quotenbulle.de Enhancer
 
-A chrome extension to change the Orbit Exchange URL on Quotenbulle.de if you have an account through another broker (e.g. bet-football) and don't want to change the domain in Bullenrechner all the time.
+A chrome extension to add some extra non-exististing functionality to Quotenbulle.de.
+
+Initially this add-on was made to change the Orbit Exchange URL on Quotenbulle.de if you have an account through another broker (e.g. bet-football) and don't want to change the domain in Bullenrechner all the time.
 
 ## Features
 
 - on https://\*.quotenbulle.de/tools/rechner/\* pages: checks with a delay of 200ms for links to Orbit Exchange and and changes the link to the configured value (e.g. 'orbitxch.com').
-- on https://\*.quotenbulle.de/tools/rechner/\* pages: adds a button to the website for easy copy of all the information to the Wettmanager Excel (worksheet Übersicht)
 - on https://\*.quotenbulle.de/tools/kombirechner/\* pages: checks with a delay of 200ms for links to Orbit Exchange and and changes the link to the configured value (e.g. 'orbitxch.com').
-- on https://\*.quotenbulle.de/tools/kombirechner/\* pages: changed format of euro values to orbit compatible format
+- on https://\*.quotenbulle.de/tools/rechner/\* pages: adds a button to the website for easy copy of all the information to the Wettmanager Excel (worksheet Übersicht)
+- on https://\*.quotenbulle.de/tools/kombirechner/\* pages: adds a button to the website for easy copy of all the information to the Wettmanager Excel (worksheet Übersicht)
+- on https://\*.quotenbulle.de/tools/kombirechner/\* pages: changed format of euro values to orbit compatible format for easy copy&paste
 
 ## Installation
 
 first: configure
-- open config.js and change the configured url to your desires
+- open config.js and change the configured values to your desires
 
 second: normal chrome debug install
 
@@ -31,8 +34,8 @@ second: great expense firefox install
 third: update
 - git pull
 - go to extensions menu in browser
-- click refresh at this extension
-- reload Bullenrechner
+- click refresh at this extension (chrome)
+- go to Addons, click gear, install from file and select xpi (firefox)
 
 ## Browsers working
 
@@ -43,7 +46,7 @@ checked with
 
 # Disclaimer
 
-I am not in touch with Quotenbulle or Orbit Exchange at all.
+I am not in touch with Quotenbulle.de or Orbit Exchange at all.
 
 
 # Other

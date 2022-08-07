@@ -1,7 +1,7 @@
 {
-  "name": "Quotenbulle.de Orbit linkchanger",
-  "description": "Extension to change orbit links at Quotenbulle.de",
-  "version": "0.0.0.1",
+  "name": "Quotenbulle.de Enhancer",
+  "description": "Extension to add some extra functionality to Quotenbulle.de",
+  "version": "1.0.0.0",
   "manifest_version": 2,
   "browser_action": {
     "default_popup": "index.html",
