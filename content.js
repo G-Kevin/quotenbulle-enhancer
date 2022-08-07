@@ -12,15 +12,17 @@ function createCopyToExcelButton() {
         }
         // as plugins are executed in an isolated environment, we have to append our custom functions to the body
         var $functionsToAppend = $('<script type="text/javascript">'
-            + 'var orbitLandingDomain = "' + orbitLandingDomain + '";'
+            + 'var lookupBookiesExcel = ' + JSON.stringify(lookupBookiesExcel) + ';'
             + 'var orbitCommission = "' + orbitCommission + '";'
             + 'var orbitCommissionOnWinnings = "' + orbitCommissionOnWinnings + '";'
+            + 'var orbitLandingDomain = "' + orbitLandingDomain + '";'
             + 'var orbitNameInExcel = "' + orbitNameInExcel + '";'
             + addFragmentToExcelString.toString()
             + copyStringToClipboard.toString()
             + createAndCopyExcelStringToClipboard.toString()
-            + translateCommissionForExcel.toString()
+            + getExcelBookieForQBString.toString()
             + renameOrbitDomain.toString()
+            + translateCommissionForExcel.toString()
             + "renameOrbitDomain(orbitLandingDomain);" // call to replace the orbit domain
             + '</script>');
         $functionsToAppend.appendTo($("body"));
@@ -58,7 +60,14 @@ function createAndCopyExcelStringToClipboard(orbitLandingDomain) {
     var category = "Pre-Game";
     var sport = "Fußball";
     var league = "";
-    var bookie = "";
+    try {
+        // works in Kombirechner as well, because QB uses invalid HTML5 and reuses the same ID for all the bookie pictures
+        var bookie = /[^/]*$/.exec(document.getElementById("bookie_type_img").src)[0];
+        bookie = getExcelBookieForQBString(bookie);
+    } catch {
+        var bookie = "";
+    }
+
     var comissionOnWinningsLay = orbitCommissionOnWinnings;
 
     if (url === "/tools/rechner/") {
@@ -258,7 +267,6 @@ function createAndCopyExcelStringToClipboard(orbitLandingDomain) {
 
         for (let i = 1; i < 6; i++) {
             // lay: all other lines
-            
             if (excelLines[i].oddLay !== undefined) {
                 excelString += addFragmentToExcelString(excelLines[i].date);
                 excelString += addFragmentToExcelString("");
@@ -298,6 +306,19 @@ function addFragmentToExcelString(data, useTabStop = true, useLinebreak = false)
     if (useLinebreak) returnFragment += lineBreak;
 
     return returnFragment;
+}
+
+function getExcelBookieForQBString(qbstring) {
+    // translate image-prefix of QB to local Excel documentation
+    var bookie = "";
+    Object.entries(lookupBookiesExcel).forEach(([key, value]) => {
+        if (qbstring.toLowerCase().startsWith(key.toLowerCase())) {
+            bookie = value;
+            return false;
+        }
+    });
+
+    return bookie;
 }
 
 function formatLayStakeLiabilityValues(orbitLandingDomain) {
