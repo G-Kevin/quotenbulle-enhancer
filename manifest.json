@@ -33,7 +33,7 @@
   ],
   "permissions": [
     "activeTab",
-     "https://*.quotenbulle.de/tools/rechner/*",
-     "https://*.quotenbulle.de/tools/kombirechner/*"
+    "https://*.quotenbulle.de/tools/rechner/*",
+    "https://*.quotenbulle.de/tools/kombirechner/*"
   ]
 }
