@@ -27,7 +27,10 @@
       "js": [
         "config.js",
         "jquery-3.6.0.min.js",
-        "content.js"
+        "module-excelcopybutton.js",
+        "module-laystakeformatter.js",
+        "module-linkchanger.js",
+        "main.js"
       ]
     }
   ],

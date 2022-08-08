@@ -1,58 +1,3 @@
-function createCopyToExcelButton() {
-    try {
-        let url;
-        try {
-            url = window.location.pathname;
-            if (url !== "/tools/rechner/" && url !== "/tools/kombirechner/") {
-                return false;
-            }
-        } catch (e) {
-            console.error("ERROR in QB copyToExcel: ", e.message);
-            return false;
-        }
-        // as plugins are executed in an isolated environment, we have to append our custom functions to the body
-        var $functionsToAppend = $('<script type="text/javascript">'
-            + 'var lookupBookiesExcel = ' + JSON.stringify(lookupBookiesExcel) + ';'
-            + 'var orbitCommission = "' + orbitCommission + '";'
-            + 'var orbitCommissionOnWinnings = "' + orbitCommissionOnWinnings + '";'
-            + 'var orbitLandingDomain = "' + orbitLandingDomain + '";'
-            + 'var orbitNameInExcel = "' + orbitNameInExcel + '";'
-            + addFragmentToExcelString.toString()
-            + copyStringToClipboard.toString()
-            + createAndCopyExcelStringToClipboard.toString()
-            + getExcelBookieForQBString.toString()
-            + renameOrbitDomain.toString()
-            + translateCommissionForExcel.toString()
-            + "renameOrbitDomain(orbitLandingDomain);" // call to replace the orbit domain
-            + '</script>');
-        $functionsToAppend.appendTo($("body"));
-
-        // compile out visible copy-Button
-        var $copyButton = $('<div style="margin: 0 auto; text-align: center"><a class="qb_button" href="javascript:createAndCopyExcelStringToClipboard()" style="text-decoration:none !important; font-size:1.3em !important;">Werte für Excel kopieren</a></div>');
-        $copyButton.appendTo($("#pgc-328-1-0")); // Bullenrechner
-        $copyButton.appendTo($("#pgc-47791-1-0")); // Kombirechner
-    } catch (e) {
-        console.error("ERROR in QB copyToExcel: ", e.message);
-    }
-}
-
-function copyStringToClipboard(str) {
-   // Temporäres Element erzeugen
-   var el = document.createElement('textarea');
-   // Den zu kopierenden String dem Element zuweisen
-   el.value = str;
-   // Element nicht editierbar setzen und aus dem Fenster schieben
-   el.setAttribute('readonly', '');
-   el.style = {position: 'absolute', left: '-9999px'};
-   document.body.appendChild(el);
-   // Text innerhalb des Elements auswählen
-   el.select();
-   // Ausgewählten Text in die Zwischenablage kopieren
-   document.execCommand('copy');
-   // Temporäres Element löschen
-   document.body.removeChild(el);
-}
-
 function createAndCopyExcelStringToClipboard(orbitLandingDomain) {
     url = window.location.pathname;
     var status = "Offen";
@@ -247,7 +192,6 @@ function createAndCopyExcelStringToClipboard(orbitLandingDomain) {
             }
         }
 
-
         // first line, back
         excelString += addFragmentToExcelString(latestDate);
         excelString += addFragmentToExcelString("");
@@ -285,7 +229,7 @@ function createAndCopyExcelStringToClipboard(orbitLandingDomain) {
         }
     }
 
-    copyStringToClipboard(excelString);
+    copyToClipboard(excelString);
 }
 
 // Excel needs a special format for percentages...
@@ -313,58 +257,49 @@ function getExcelBookieForQBString(qbstring) {
     Object.entries(lookupBookiesExcel).forEach(([key, value]) => {
         if (qbstring.toLowerCase().startsWith(key.toLowerCase())) {
             bookie = value;
-            return false;
+            return true;
         }
     });
 
     return bookie;
 }
 
-function formatLayStakeLiabilityValues(orbitLandingDomain) {
-    try {
-        var layStakeValues = [];
-        var liabilityValues = [];
-        // switch comma to dot in lay stake field to match orbit format
-        $("input[id^='input_lay_stake_']").each(function (i, element) {
-             layStakeValues[i] = element.value.replace(/(\d*),(\d*)/, "$1.$2");
-        });
-        $("input[id^='input_liability_']").each(function (i, element) {
-             liabilityValues[i] = element.value.replace(/(\d*),(\d*)/, "$1.$2");
-        });
-        $("input[id^='input_lay_stake_']").each(function (i, element) {
-             element.value = layStakeValues[i];
-        });
-        $("input[id^='input_liability_']").each(function (i, element) {
-             element.value = liabilityValues[i];
-        });
-    } catch (e) {
-        console.error("ERROR in QB layStakeFormatter: ", e.message);
-        return false;
-    }
+function copyToClipboard(strToCopy) {
+    // Temporäres Element erzeugen
+    var el = document.createElement('textarea');
+
+    el.value = strToCopy;
+
+    // Element nicht editierbar setzen und aus dem Fenster schieben
+    el.setAttribute('readonly', '');
+    el.style = {position: 'absolute', left: '-9999px'};
+    document.body.appendChild(el);
+
+    el.select();
+    document.execCommand('copy');
+
+    // Temporäres Element löschen
+    document.body.removeChild(el);
 }
 
-function renameOrbitDomain(orbitLandingDomain) {
-    // replace Orbit domain with configured url
-    document.getElementById("exchange_type_img").parentNode.outerHTML = document.getElementById("exchange_type_img").parentNode.outerHTML.replace(/(www\.orbitexch\.com)/g, orbitLandingDomain);
-}
-
-setTimeout(() => {
+function createCopyToExcelButton() {
     try {
-        createCopyToExcelButton();
-
-        if (window.location.pathname === "/tools/kombirechner/") {
-            // set listener on input field to trigger formatter after every change
-            $("input[id^='input_back_odds_']").on("change paste keyup propertychange input", function() {
-                formatLayStakeLiabilityValues(orbitLandingDomain);
-            });
-            $("input[id^='input_lay_odds_']").on("change paste keyup propertychange input", function() {
-                formatLayStakeLiabilityValues(orbitLandingDomain);
-            });
-
-            // trigger initially to format the values after loading page
-            formatLayStakeLiabilityValues(orbitLandingDomain);
+        let url;
+        try {
+            url = window.location.pathname;
+            if (url !== "/tools/rechner/" && url !== "/tools/kombirechner/") {
+                return false;
+            }
+        } catch (e) {
+            console.error("ERROR in QB copyToExcel: ", e.message);
+            return false;
         }
+
+        // compile out visible copy-Button
+        var $copyButton = $('<div style="margin: 0 auto; text-align: center"><a class="qb_button" href="javascript:createAndCopyExcelStringToClipboard()" style="text-decoration:none !important; font-size:1.3em !important;">Werte für Excel kopieren</a></div>');
+        $copyButton.appendTo($("#pgc-328-1-0")); // Bullenrechner
+        $copyButton.appendTo($("#pgc-47791-1-0")); // Kombirechner
     } catch (e) {
-        console.error("ERROR in QB Linkchanger: ", e.message);
+        console.error("ERROR in QB copyToExcel: ", e.message);
     }
-}, 100);
+}
