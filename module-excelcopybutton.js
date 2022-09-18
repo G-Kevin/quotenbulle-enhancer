@@ -11,7 +11,13 @@ function createAndCopyExcelStringToClipboard(orbitLandingDomain) {
         var bookie = /[^/]*$/.exec(document.getElementById("bookie_type_img").src)[0];
         bookie = getExcelBookieForQBString(bookie);
     } catch {
-        var bookie = "";
+        // sometimes, link is not present, use the logo above instead
+        try {
+            var bookie = /[^/]*$/.exec(document.getElementById("bookie_image").src)[0];
+            bookie = getExcelBookieForQBString(bookie);
+        } catch {
+            var bookie = "";
+        }
     }
 
     var comissionOnWinningsLay = orbitCommissionOnWinnings;
