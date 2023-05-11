@@ -96,6 +96,7 @@ const lookupBookiesExcel = {
 	"nordicbet" : "",
 	"novibet" : "Novibet",
 	"noxwin" : "Noxwin",
+	"oddset" : "Oddset",
 	"players_olymp" : "",
 	"rabona" : "",
 	"redbet" : "",
