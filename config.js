@@ -5,11 +5,11 @@ var orbitNameInExcel = "Orbit"; // Name der Wettbörse in der Excel
 
 // Wie heißen die Buchmacher in deiner Excel?
 const lookupBookiesExcel = {
-	"10bet" : "",
+	"10bet" : "10bet",
 	"12bet" : "",
 	"18bet" : "",
 	"1xbet" : "",
-	"20bet" : "",
+	"20bet" : "20bet",
 	"22bet" : "",
 	"888sport" : "888sport",
 	"admiral" : "AdmiralBet",
@@ -74,6 +74,7 @@ const lookupBookiesExcel = {
 	"ibet" : "",
 	"intertops" : "Intertops",
 	"interwetten" : "Interwetten",
+	"ivibet" : "Ivibet",
 	"jackone" : "Jackone",
 	"jaxx" : "Jaxx",
 	"karamba" : "",
@@ -83,7 +84,7 @@ const lookupBookiesExcel = {
 	"leo_vegas" : "LeoVegas",
 	"librabet" : "",
 	"lsbet" : "LSBet",
-	"lvbet" : "",
+	"lvbet" : "LVBet",
 	"malina" : "Malina",
 	"mansionbet" : "",
 	"mobilebet" : "Mobilebet",
