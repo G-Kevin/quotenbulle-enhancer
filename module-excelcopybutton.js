@@ -1,6 +1,7 @@
 function createAndCopyExcelStringToClipboard(orbitLandingDomain) {
     url = window.location.pathname;
-    var status = "Offen";
+    var status_offen = "Offen";
+    var status_todo = "ToDo";
     var excelString = "";
     var category = "Pre-Game";
     var sport = "Fußball";
@@ -105,7 +106,7 @@ function createAndCopyExcelStringToClipboard(orbitLandingDomain) {
         excelString += addFragmentToExcelString(comissionOnWinningsBack ? "j" : "");
         excelString += addFragmentToExcelString(commissionBack);
         excelString += addFragmentToExcelString(bookie);
-        excelString += addFragmentToExcelString(status, false, true);
+        excelString += addFragmentToExcelString(status_offen, false, true);
 
         // second line, lay
         excelString += addFragmentToExcelString(date);
@@ -121,7 +122,7 @@ function createAndCopyExcelStringToClipboard(orbitLandingDomain) {
         excelString += addFragmentToExcelString(comissionOnWinningsLay ? "j" : "");
         excelString += addFragmentToExcelString(commissionLay);
         excelString += addFragmentToExcelString(orbitNameInExcel);
-        excelString += addFragmentToExcelString(status, false);
+        excelString += addFragmentToExcelString(status_offen, false);
     } else if (url === "/tools/kombirechner/") {
         // handle Kombirechner
         // 
@@ -212,7 +213,7 @@ function createAndCopyExcelStringToClipboard(orbitLandingDomain) {
         excelString += addFragmentToExcelString(comissionOnWinningsBack ? "j" : "");
         excelString += addFragmentToExcelString(commissionBack);
         excelString += addFragmentToExcelString(bookie);
-        excelString += addFragmentToExcelString(status, false, true);
+        excelString += addFragmentToExcelString(status_offen, false, true);
 
         for (let i = 1; i < 6; i++) {
             // lay: all other lines
@@ -230,7 +231,7 @@ function createAndCopyExcelStringToClipboard(orbitLandingDomain) {
                 excelString += addFragmentToExcelString(comissionOnWinningsLay ? "j" : "");
                 excelString += addFragmentToExcelString(commissionLay);
                 excelString += addFragmentToExcelString(orbitNameInExcel);
-                excelString += addFragmentToExcelString(status, false, true);
+                excelString += addFragmentToExcelString(i == 1 ? status_offen : status_todo, false, true);
             }
         }
     }
