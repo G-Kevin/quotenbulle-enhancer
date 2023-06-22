@@ -1,6 +1,6 @@
 # Quotenbulle.de Enhancer
 
-A chrome extension to add some extra non-exististing functionality to Quotenbulle.de.
+An extension to add some extra non-exististing functionality to Quotenbulle.de.
 
 Initially this add-on was made to change the Orbit Exchange URL on Quotenbulle.de if you have an account through another broker (e.g. bet-football) and don't want to change the domain in Bullenrechner all the time.
 
@@ -31,11 +31,15 @@ second: great expense firefox install
 - rename zip to xpi
 - go to Addons, click gear, install from file and select xpi
 
+OR
+
+- go to Addons, click gear, install from file and select xpi in firefox folder from this repository or drag&drop this xpi
+
 third: update
 - git pull
 - go to extensions menu in browser
 - click refresh at this extension (chrome)
-- go to Addons, click gear, install from file and select xpi (firefox)
+- go to Addons, click gear, install from file and select xpi or drag&drop xpi (firefox)
 
 ## Browsers working
 
@@ -47,7 +51,6 @@ checked with
 # Disclaimer
 
 I am not in touch with Quotenbulle.de or Orbit Exchange at all.
-
 
 # Other
 ## add jQuery to developer console
