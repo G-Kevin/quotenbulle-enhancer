@@ -89,7 +89,7 @@ const lookupBookiesExcel = {
 	"mansionbet" : "",
 	"mobilebet" : "Mobilebet",
 	"moplay" : "",
-	"mr_green" : "MrGreen (AT)",
+	"mr_green" : "MrGreen",
 	"mybet" : "mybet.de",
 	"neo_bet" : "NeoBet",
 	"netbet" : "Netbet",
