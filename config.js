@@ -56,6 +56,7 @@ const lookupBookiesExcel = {
 	"cbet" : "Cbet",
 	"cherry_casino": "",
 	"comeon" : "ComeOn!",
+	"crazybuzzer" : "CrazyBuzzer",
 	"cyberbet" : "",
 	"digibet" : "",
 	"double_bet" : "",
