@@ -51,8 +51,3 @@ checked with
 # Disclaimer
 
 I am not in touch with Quotenbulle.de or Orbit Exchange at all.
-
-# Other
-## add jQuery to developer console
-    var script = document.createElement('script');
-    script.src = "https://code.jquery.com/jquery-3.6.0.min.js";document.getElementsByTagName('head')[0].appendChild(script);
