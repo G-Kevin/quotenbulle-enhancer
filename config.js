@@ -32,6 +32,7 @@ const lookupBookiesExcel = {
 	"betfive" : "",
 	"betgold" : "",
 	"bethard" : "",
+	"betify" : "Betify",
 	"betinia" : "",
 	"betkeen" : "",
 	"betmaster" : "",
