@@ -32,29 +32,29 @@ function createAndCopyExcelStringToClipboard(orbitLandingDomain) {
     var comissionOnWinningsBack = dropdownListCommissionBack.options[dropdownListCommissionBack.selectedIndex].text.includes("vom Nettogewinn") ? "j" : "";
 
     switch (dropdownListCommissionBack.options[dropdownListCommissionBack.selectedIndex].value) {
-      case "no_tax":
-          var commissionBack = "0";
-        break;
-      case "tax_to_105":
-          var commissionBack = "4,77";
-        break;
-      case "tax_to_100":
-          var commissionBack = "5";
-        break;
-      case "tax_53_to_105":
-          var commissionBack = "5,03";
-        break;
-      case "tax_53_to_100":
-          var commissionBack = "5,3";
-        break;
-      case "tax_to_105_netto":
-          var commissionBack = "4,77";
-        break;
-      case "tax_to_100_netto":
-          var commissionBack = "5";
-        break;
-      default:
-        throw "Unknown commission type for back!"
+        case "no_tax":
+            var commissionBack = "0";
+            break;
+        case "tax_to_105":
+            var commissionBack = "4,77";
+            break;
+        case "tax_to_100":
+            var commissionBack = "5";
+            break;
+        case "tax_53_to_105":
+            var commissionBack = "5,03";
+            break;
+        case "tax_53_to_100":
+            var commissionBack = "5,3";
+            break;
+        case "tax_to_105_netto":
+            var commissionBack = "4,77";
+            break;
+        case "tax_to_100_netto":
+            var commissionBack = "5";
+            break;
+        default:
+            throw "Unknown commission type for back!"
     }
     commissionBack = translateCommissionForExcel(commissionBack);
     var commissionLay = translateCommissionForExcel(orbitCommission);
@@ -279,7 +279,7 @@ function copyToClipboard(strToCopy) {
 
     // Element nicht editierbar setzen und aus dem Fenster schieben
     el.setAttribute('readonly', '');
-    el.style = {position: 'absolute', left: '-9999px'};
+    el.style = { position: 'absolute', left: '-9999px' };
     document.body.appendChild(el);
 
     el.select();
