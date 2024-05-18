@@ -1,3 +1,25 @@
+function translateMonthsFromEnglish(checkDate) {
+    var translateMonthsEnglish = {
+        january: "01",
+        february: "02",
+        march: "03",
+        april: "04",
+        may: "05",
+        june: "06",
+        july: "07",
+        august: "08",
+        september: "09",
+        october: "10",
+        november: "11",
+        december: "12",
+    };
+    for (var month in translateMonthsEnglish) {
+        checkDate = checkDate.replace(new RegExp(month, "ig"), translateMonthsEnglish[month]);
+    }
+
+    return checkDate;
+}
+
 function createAndCopyExcelStringToClipboard(orbitLandingDomain) {
     url = window.location.pathname;
     var status_offen = "Offen";
@@ -144,15 +166,31 @@ function createAndCopyExcelStringToClipboard(orbitLandingDomain) {
 
         for (let i = 5; i > 0; i--) {
             excelLines[i] = {};
-            if (isLatestLine && ['', '0,00'].includes(document.getElementById('input_back_odds_' + i.toString()).value)) {
+            if (isLatestLine && !['', '0,00'].includes(document.getElementById('input_back_odds_' + i.toString()).value)) {
                 isLatestLine = false; // block upcoming iterations
-                latestDate = document.getElementById('input_date_' + i.toString()).value.replace(/\s-\s.*/g, '').replace(/(\d{2})\.(\d{2})\.(\d{2})/g, '$1.$2.20$3');
+                latestDate = document.getElementById('input_date_' + i.toString()).value;
+                if (/(\d{2})\.(\d{2})\.(\d{2})/g.test(latestDate)) {
+                    // normal QB format
+                    latestDate = latestDate.replace(/\s-\s.*/g, '').replace(/(\d{2})\.(\d{2})\.(\d{2})/g, '$1.$2.20$3');
+                } else {
+                    // english format, e.g. from oddsmonkey
+                    latestDate = translateMonthsFromEnglish(latestDate);
+                    latestDate = latestDate.replace(/(\d{2}) (\w+)/g, '$1.$2.' + new Date().getFullYear().toString());
+                }
             }
 
             // collect general information from this line
             if (!['', '0,00'].includes(document.getElementById('input_back_odds_' + i.toString()).value)) {
                 try {
-                    excelLines[i].date = document.getElementById('input_date_' + i.toString()).value.replace(/\s-\s.*/g, '').replace(/(\d{2})\.(\d{2})\.(\d{2})/g, '$1.$2.20$3');
+                    checkDate = document.getElementById('input_date_' + i.toString()).value;
+                    if (/(\d{2})\.(\d{2})\.(\d{2})/g.test(checkDate)) {
+                        // normal QB format
+                        excelLines[i].date = checkDate.replace(/\s-\s.*/g, '').replace(/(\d{2})\.(\d{2})\.(\d{2})/g, '$1.$2.20$3');
+                    } else {
+                        // english format, e.g. from oddsmonkey
+                        checkDate = translateMonthsFromEnglish(checkDate);
+                        excelLines[i].date = checkDate.replace(/(\d{2}) (\w+)/g, '$1.$2.' + new Date().getFullYear().toString());
+                    }
                 } catch {
                     excelLines[i].date = "";
                 }

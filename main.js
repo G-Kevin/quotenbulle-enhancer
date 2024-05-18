@@ -9,6 +9,7 @@ setTimeout(() => {
             + 'var orbitNameInExcel = "' + orbitNameInExcel + '";'
             + addFragmentToExcelString.toString()
             + copyToClipboard.toString()
+            + translateMonthsFromEnglish.toString()
             + createAndCopyExcelStringToClipboard.toString()
             + getExcelBookieForQBString.toString()
             + renameOrbitDomain.toString()
