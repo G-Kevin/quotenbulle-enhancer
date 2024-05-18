@@ -144,13 +144,13 @@ function createAndCopyExcelStringToClipboard(orbitLandingDomain) {
 
         for (let i = 5; i > 0; i--) {
             excelLines[i] = {};
-            if (isLatestLine && document.getElementById('input_back_odds_' + i.toString()).value !== '') {
+            if (isLatestLine && ['', '0,00'].includes(document.getElementById('input_back_odds_' + i.toString()).value)) {
                 isLatestLine = false; // block upcoming iterations
                 latestDate = document.getElementById('input_date_' + i.toString()).value.replace(/\s-\s.*/g, '').replace(/(\d{2})\.(\d{2})\.(\d{2})/g, '$1.$2.20$3');
             }
 
             // collect general information from this line
-            if (document.getElementById('input_back_odds_' + i.toString()).value !== '') {
+            if (!['', '0,00'].includes(document.getElementById('input_back_odds_' + i.toString()).value)) {
                 try {
                     excelLines[i].date = document.getElementById('input_date_' + i.toString()).value.replace(/\s-\s.*/g, '').replace(/(\d{2})\.(\d{2})\.(\d{2})/g, '$1.$2.20$3');
                 } catch {
@@ -158,7 +158,11 @@ function createAndCopyExcelStringToClipboard(orbitLandingDomain) {
                 }
 
                 try {
-                    excelLines[i].event = document.getElementById("input_event_" + i.toString()).value;
+                    if (document.getElementById("input_event_" + i.toString()).value !== " - ") {
+                        excelLines[i].event = document.getElementById("input_event_" + i.toString()).value;
+                    } else {
+                        excelLines[i].event = "";
+                    }
                 } catch {
                     excelLines[i].event = "";
                 }
